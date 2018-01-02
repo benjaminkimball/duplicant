@@ -1,0 +1,19 @@
+{
+  "name": "duplicant",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminkimball/duplicant.git"
+  },
+  "author": "Benjamin Kimball <hello@benjaminkimball.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminkimball/duplicant/issues"
+  },
+  "homepage": "https://github.com/benjaminkimball/duplicant#readme"
+}
