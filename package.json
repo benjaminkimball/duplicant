@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/benjaminkimball/duplicant/issues"
   },
-  "homepage": "https://github.com/benjaminkimball/duplicant#readme"
+  "homepage": "https://github.com/benjaminkimball/duplicant#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "fs-extra": "^5.0.0"
+  }
 }
