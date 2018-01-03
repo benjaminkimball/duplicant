@@ -24,8 +24,7 @@ export default {
   },
   output: {
     path: isProd ? join(process.cwd(), 'dist') : join(process.cwd(), '.build'),
-    // TODO: Generalize this!
-    publicPath: `${isProd ? process.env.CDN_BASE_URL : 'http://0.0.0.0:5001'}/assets/`,
+    publicPath: 'http://0.0.0.0:5001/assets/',
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
