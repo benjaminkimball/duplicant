@@ -107,7 +107,6 @@ try {
     process.exit()
   }
 } catch (err) {
-  console.log(err)
   console.error(chalk.red('Please supply a directory to get started!'))
   process.exit(1)
 }
