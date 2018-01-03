@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "scripts": {
+    "lint": "npm-run-all --parallel lint:css lint:js",
+    "lint:css": "stylelint 'client/**/*.js'",
+    "lint:js": "eslint '.'",
+    "pretest": "npm run lint",
+    "start": "TZ=UTC npm-run-all --parallel start:client start:server",
+    "start:client": "webpack-dev-server --config config/webpack.config.client.babel.js",
+    "start:server": "webpack --config config/webpack.config.server.babel.js",
+    "test": "NODE_ENV=test TZ=UTC ava"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-polyfill",
+      "babel-register"
+    ]
+  }
+}

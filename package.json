@@ -18,6 +18,7 @@
   "homepage": "https://github.com/benjaminkimball/duplicant#readme",
   "dependencies": {
     "chalk": "^2.3.0",
+    "cross-spawn": "^5.1.0",
     "fs-extra": "^5.0.0"
   }
 }

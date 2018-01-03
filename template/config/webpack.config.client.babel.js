@@ -12,7 +12,6 @@ export default {
   target: 'web',
   entry: {
     client: [
-      'es6-promise/auto',
       ...!isProd ? [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://0.0.0.0:5001',
