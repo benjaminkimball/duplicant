@@ -1,0 +1,5 @@
+{
+  "extends": ["standard", "standard-jsx"],
+  "parser": "babel-eslint",
+  "rules": { "arrow-parens": ["error", "always"] }
+}
