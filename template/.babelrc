@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    "styled-components",
+    "syntax-dynamic-import",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "presets": ["env", "react"]
+}

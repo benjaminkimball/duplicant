@@ -20,7 +20,7 @@ export default {
       ] : [],
       join(process.cwd(), 'client/index.js')
     ],
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    vendor: ['react', 'react-dom', 'react-router-dom', 'styled-components']
   },
   output: {
     path: isProd ? join(process.cwd(), 'dist') : join(process.cwd(), '.build'),
