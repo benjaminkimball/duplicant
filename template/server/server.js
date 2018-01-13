@@ -1,10 +1,16 @@
-import express from 'express'
-import logger from 'morgan'
+import Koa from 'koa'
+import koaHelmet from 'koa-helmet'
+import Router from 'koa-router'
 
 import renderClient from './middleware/render-client'
 
-const app = express()
+const app = new Koa()
 export default app
 
-app.use(logger('dev'))
-app.get('*', renderClient)
+app.use(koaHelmet())
+
+const router = new Router()
+router.get('*', renderClient())
+
+app.use(router.routes())
+app.use(router.allowedMethods())

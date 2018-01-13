@@ -23,8 +23,9 @@ if (['--help', '-h'].includes(command)) {
 }
 
 const dependencies = [
-  'express',
-  'morgan',
+  'koa',
+  'koa-helmet',
+  'koa-router',
   'react',
   'react-dom',
   'react-router-dom',

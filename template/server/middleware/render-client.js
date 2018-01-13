@@ -17,4 +17,4 @@ const html = () => `
 </html>
 `
 
-export default (req, res) => res.send(html())
+export default () => async (ctx) => { ctx.body = html() }
