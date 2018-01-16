@@ -6,10 +6,6 @@
   "bin": {
     "duplicant": "./bin/duplicant.js"
   },
-  "files": [
-    "bin",
-    "template"
-  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
