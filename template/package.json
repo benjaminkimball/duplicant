@@ -6,14 +6,20 @@
     "lint:js": "eslint '.'",
     "pretest": "npm run lint",
     "start": "TZ=UTC npm-run-all --parallel start:client start:server",
-    "start:client": "webpack-dev-server --config config/webpack.config.client.babel.js",
-    "start:server": "webpack --config config/webpack.config.server.babel.js",
-    "test": "NODE_ENV=test TZ=UTC ava"
+    "start:client": "webpack-dev-server --config config/webpack.config.client.babel.js --mode development",
+    "start:server": "webpack --config config/webpack.config.server.babel.js --mode development",
+    "test": "NODE_ENV=test TZ=UTC ava $([ ! -z $TEST_CONCURRENCY ] && echo \"-c $TEST_CONCURRENCY\")",
+    "test:coverage": "nyc npm test -- --verbose"
   },
   "ava": {
     "babel": "inherit",
     "require": [
       "babel-polyfill",
+      "babel-register"
+    ]
+  },
+  "nyc": {
+    "require": [
       "babel-register"
     ]
   }

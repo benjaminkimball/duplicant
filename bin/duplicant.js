@@ -23,9 +23,9 @@ if (['--help', '-h'].includes(command)) {
 }
 
 const dependencies = [
-  'koa',
-  'koa-helmet',
-  'koa-router',
+  'express',
+  'helmet',
+  'morgan',
   'react',
   'react-dom',
   'react-router-dom',
@@ -61,6 +61,7 @@ const devDependencies = [
   'stylelint-config-styled-components',
   'stylelint-processor-styled-components',
   'webpack',
+  'webpack-cli',
   'webpack-dev-server',
   'webpack-manifest-plugin',
   'webpack-node-externals'

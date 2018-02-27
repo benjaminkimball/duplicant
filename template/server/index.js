@@ -2,7 +2,7 @@ import { createServer } from 'http'
 
 import app from './server'
 
-let current = app.callback()
+let current = app
 
 const server = createServer(current)
 server.listen(process.env.PORT, () => {
@@ -10,7 +10,7 @@ server.listen(process.env.PORT, () => {
 })
 
 module.hot && module.hot.accept('./server', () => {
-  const next = require('./server').default.callback()
+  const next = require('./server').default
 
   server.removeListener('request', current)
   server.on('request', next)
