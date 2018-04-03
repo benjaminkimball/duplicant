@@ -1,23 +1,37 @@
 import React from 'react'
-import { render as r } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import { hydrate } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
-import Routes from './routes'
+import * as chunks from '../common/chunks'
+import Routes from '../common/routes'
 
-const rootElement = document.getElementById('root')
-const render = (rootElement, Routes) => r((
-  <AppContainer>
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
-  </AppContainer>
-), rootElement)
+import Wrapper from './wrapper'
 
-render(rootElement, Routes)
+// Alias window object, global will be populated with client config from server
+window.global = window
 
-module.hot && module.hot.accept('./routes', () => {
-  const { default: Routes } = require('./routes')
+const render = (chunks, Routes) => {
+  const splitPoints = window.__SPLIT_POINTS__ || []
 
-  render(rootElement, Routes)
+  Promise
+    .all(splitPoints.map((name) => chunks[name].loadComponent()))
+    .then(() => hydrate((
+      <Wrapper>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </Wrapper>
+    ), document.getElementById('root')))
+}
+
+module.hot && module.hot.accept([
+  '../common/chunks',
+  '../common/routes'
+], () => {
+  const chunks = require('../common/chunks')
+  const Routes = require('../common/routes').default
+
+  render(chunks, Routes)
 })
+
+render(chunks, Routes)

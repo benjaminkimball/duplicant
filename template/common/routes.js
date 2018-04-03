@@ -3,8 +3,11 @@ import { Route, Switch } from 'react-router-dom'
 
 import * as chunks from './chunks'
 
-export default () => (
+const Routes = () => (
   <Switch>
+    <Route path='/' exact component={chunks.HomePage} />
     <Route component={chunks.NotFoundPage} />
   </Switch>
 )
+
+export default Routes

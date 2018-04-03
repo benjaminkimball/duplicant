@@ -1,31 +1,37 @@
-import dotenv from 'dotenv'
 import { join } from 'path'
+import { URL } from 'url'
 import webpack from 'webpack'
-import ManifestPlugin from 'webpack-manifest-plugin'
+// import S3Plugin from 'webpack-s3-plugin'
+
+import EntrypointPlugin from '../lib/entrypoint-plugin'
 
 const isProd = process.env.NODE_ENV === 'production'
+const rootDir = process.cwd()
 
-dotenv.config({ silent: isProd })
+const assetsBaseUrl = new URL(process.env.ASSETS_BASE_URL)
+const publicPath = `${assetsBaseUrl}/`
 
 export default {
-  devtool: isProd ? 'source-map' : 'eval',
+  devtool: !isProd
+    ? 'eval'
+    : 'hidden-source-map',
   target: 'web',
-  entry: {
-    client: [
-      ...!isProd ? [
-        'react-hot-loader/patch',
-        'webpack-dev-server/client?http://0.0.0.0:5001',
-        'webpack/hot/only-dev-server'
-      ] : [],
-      join(process.cwd(), 'client/index.js')
-    ],
-    vendor: ['react', 'react-dom', 'react-router-dom', 'styled-components']
-  },
+  entry: [
+    ...!isProd ? [
+      `webpack-dev-server/client?${assetsBaseUrl.origin}/`,
+      'webpack/hot/only-dev-server'
+    ] : [],
+    join(rootDir, 'client/index.js')
+  ],
   output: {
-    path: isProd ? join(process.cwd(), 'dist') : join(process.cwd(), '.build'),
-    publicPath: 'http://0.0.0.0:5001/assets/',
-    filename: isProd ? '[name].[chunkhash].js' : '[name].js',
-    chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
+    path: join(rootDir, 'dist'),
+    publicPath,
+    filename: !isProd
+      ? '[name].js'
+      : '[name].[chunkhash].js',
+    chunkFilename: !isProd
+      ? '[name].js'
+      : '[name].[chunkhash].js'
   },
   module: {
     rules: [{
@@ -35,22 +41,34 @@ export default {
     }]
   },
   plugins: [
+    new webpack.NormalModuleReplacementPlugin(
+      /\/common\/chunks.js/,
+      './client-chunks.js'
+    ),
     ...!isProd ? [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     ] : [
-      new ManifestPlugin(),
-      new webpack.HashedModuleIdsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({ name: ['vendor'] }),
-      new webpack.optimize.CommonsChunkPlugin({ name: ['bootstrap'], minChunks: Infinity })
+      new EntrypointPlugin(),
+      // new S3Plugin({
+      //   basePath: 'assets',
+      //   exclude: /\.entrypoint|server\.js/,
+      //   progress: false,
+      //   s3Options: {
+      //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+      //   },
+      //   s3UploadOptions: { Bucket: process.env.S3_BUCKET_NAME }
+      // }),
+      new webpack.HashedModuleIdsPlugin()
     ]
   ],
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
-    host: '0.0.0.0',
-    port: '5001',
-    publicPath: 'http://0.0.0.0:5001/assets/',
+    host: assetsBaseUrl.hostname,
+    port: assetsBaseUrl.port,
+    publicPath,
     hot: true
   }
 }

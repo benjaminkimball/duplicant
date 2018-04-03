@@ -1,5 +1,6 @@
 {
-  "extends": ["standard", "standard-jsx"],
+  "extends": ["plugin:security/recommended", "standard", "standard-jsx"],
   "parser": "babel-eslint",
+  "plugins": ["security"],
   "rules": { "arrow-parens": ["error", "always"] }
 }

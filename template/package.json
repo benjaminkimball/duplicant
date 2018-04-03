@@ -1,15 +1,17 @@
 {
   "version": "0.1.0",
   "scripts": {
-    "lint": "npm-run-all --parallel lint:css lint:js",
-    "lint:css": "stylelint 'client/**/*.js'",
-    "lint:js": "eslint '.'",
-    "pretest": "npm run lint",
+    "build:client": "NODE_ENV=production webpack --config config/webpack.config.client.babel.js --mode production",
+    "build:server": "NODE_ENV=production webpack --config config/webpack.config.server.babel.js --mode production",
+    "lint": "npm run lint:scripts && npm run lint:styles",
+    "lint:scripts": "eslint .",
+    "lint:styles": "stylelint .",
     "start": "TZ=UTC npm-run-all --parallel start:client start:server",
-    "start:client": "webpack-dev-server --config config/webpack.config.client.babel.js --mode development",
-    "start:server": "webpack --config config/webpack.config.server.babel.js --mode development",
+    "start:client": "webpack-dev-server -r dotenv/config --config config/webpack.config.client.babel.js --mode development",
+    "start:server": "webpack -r dotenv/config --config config/webpack.config.server.babel.js --mode development",
     "test": "NODE_ENV=test TZ=UTC ava $([ ! -z $TEST_CONCURRENCY ] && echo \"-c $TEST_CONCURRENCY\")",
-    "test:coverage": "nyc npm test -- --verbose"
+    "test:coverage": "nyc npm test -- --verbose",
+    "test:security": "nsp check"
   },
   "ava": {
     "babel": "inherit",
@@ -19,8 +21,8 @@
     ]
   },
   "nyc": {
-    "require": [
-      "babel-register"
+    "exclude": [
+      "**/components/**"
     ]
   }
 }

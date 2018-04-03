@@ -2,12 +2,13 @@ import { createServer } from 'http'
 
 import app from './server'
 
-let current = app
-
-const server = createServer(current)
-server.listen(process.env.PORT, () => {
-  console.info(`Listening on port ${process.env.PORT}`)
+const { HOST, PORT } = process.env
+const server = createServer(app)
+server.listen(PORT, HOST, () => {
+  console.log(`Listening at http://${HOST}:${PORT}`)
 })
+
+let current = app
 
 module.hot && module.hot.accept('./server', () => {
   const next = require('./server').default
