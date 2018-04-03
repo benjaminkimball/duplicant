@@ -29,6 +29,7 @@ const dependencies = [
   'react',
   'react-dom',
   'react-router-dom',
+  'serialize-javascript',
   'styled-components'
 ]
 
@@ -56,6 +57,7 @@ const devDependencies = [
   'eslint-plugin-standard',
   'npm-run-all',
   'nsp',
+  'nyc',
   'react-hot-loader',
   'start-server-webpack-plugin',
   'stylelint',
@@ -65,8 +67,8 @@ const devDependencies = [
   'webpack',
   'webpack-cli',
   'webpack-dev-server',
-  'webpack-manifest-plugin',
-  'webpack-node-externals'
+  'webpack-node-externals',
+  'webpack-s3-plugin'
 ]
 
 try {
