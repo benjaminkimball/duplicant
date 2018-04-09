@@ -2,7 +2,7 @@
 
 const chalk = require('chalk')
 const spawn = require('cross-spawn')
-const { copySync, existsSync, readdirSync } = require('fs-extra')
+const { copySync, existsSync, moveSync, readdirSync } = require('fs-extra')
 const { resolve } = require('path')
 
 const pkg = require('../package.json')
@@ -34,7 +34,6 @@ const dependencies = [
 ]
 
 const devDependencies = [
-  'ava',
   'babel-eslint',
   'babel-loader',
   'babel-plugin-styled-components',
@@ -45,6 +44,7 @@ const devDependencies = [
   'babel-preset-env',
   'babel-preset-react',
   'babel-register',
+  'chai',
   'dotenv',
   'eslint',
   'eslint-config-standard',
@@ -55,6 +55,7 @@ const devDependencies = [
   'eslint-plugin-react',
   'eslint-plugin-security',
   'eslint-plugin-standard',
+  'mocha',
   'npm-run-all',
   'nsp',
   'nyc',
@@ -91,7 +92,8 @@ try {
       spawn.sync('npm', ['install', ...dependencies], { cwd: directory, stdio: 'inherit' })
       spawn.sync('npm', ['install', ...devDependencies], { cwd: directory, stdio: 'inherit' })
 
-      copySync(resolve(templateDirectory, '.env.example'), resolve(directory, '.env'))
+      copySync(resolve(directory, '.env.example'), resolve(directory, '.env'))
+      moveSync(resolve(directory, 'gitignore'), resolve(directory, '.gitignore'))
 
       console.log(chalk.green('Time to get shit done!!'))
 
@@ -106,7 +108,8 @@ try {
     spawn.sync('npm', ['install', ...dependencies], { cwd: directory, stdio: 'inherit' })
     spawn.sync('npm', ['install', '--save-dev', ...devDependencies], { cwd: directory, stdio: 'inherit' })
 
-    copySync(resolve(templateDirectory, '.env.example'), resolve(directory, '.env'))
+    copySync(resolve(directory, '.env.example'), resolve(directory, '.env'))
+    moveSync(resolve(directory, 'gitignore'), resolve(directory, '.gitignore'))
 
     console.log(chalk.green('Time to get shit done!!'))
 

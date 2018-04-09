@@ -3,22 +3,15 @@
   "scripts": {
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.client.babel.js --mode production",
     "build:server": "NODE_ENV=production webpack --config config/webpack.config.server.babel.js --mode production",
-    "lint": "npm run lint:scripts && npm run lint:styles",
+    "lint": "npm-run-all --parallel lint:scripts lint:styles",
     "lint:scripts": "eslint .",
     "lint:styles": "stylelint .",
     "start": "TZ=UTC npm-run-all --parallel start:client start:server",
     "start:client": "webpack-dev-server -r dotenv/config --config config/webpack.config.client.babel.js --mode development",
     "start:server": "webpack -r dotenv/config --config config/webpack.config.server.babel.js --mode development",
-    "test": "NODE_ENV=test TZ=UTC ava $([ ! -z $TEST_CONCURRENCY ] && echo \"-c $TEST_CONCURRENCY\")",
-    "test:coverage": "nyc npm test -- --verbose",
-    "test:security": "nsp check"
-  },
-  "ava": {
-    "babel": "inherit",
-    "require": [
-      "babel-polyfill",
-      "babel-register"
-    ]
+    "test": "NODE_ENV=test TZ=UTC mocha --recursive --require babel-register {client,common,server}/**/*.test.js",
+    "test:coverage": "nyc npm test",
+    "test:security": "nsp check --threshold 7"
   },
   "nyc": {
     "exclude": [
