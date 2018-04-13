@@ -45,6 +45,7 @@ const devDependencies = [
   'babel-preset-react',
   'babel-register',
   'chai',
+  'chai-subset',
   'dotenv',
   'eslint',
   'eslint-config-standard',

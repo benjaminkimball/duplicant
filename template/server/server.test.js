@@ -1,4 +1,4 @@
-import { expect } from 'chai'
+import { expect } from '../lib/chai'
 import { describe, it } from 'mocha'
 
 import server from './server'
