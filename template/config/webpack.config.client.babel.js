@@ -1,7 +1,6 @@
 import { join } from 'path'
 import { URL } from 'url'
 import webpack from 'webpack'
-// import S3Plugin from 'webpack-s3-plugin'
 
 import EntrypointPlugin from '../lib/entrypoint-plugin'
 
@@ -51,16 +50,6 @@ export default {
       new webpack.NoEmitOnErrorsPlugin()
     ] : [
       new EntrypointPlugin(),
-      // new S3Plugin({
-      //   basePath: 'assets',
-      //   exclude: /\.entrypoint|server\.js/,
-      //   progress: false,
-      //   s3Options: {
-      //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-      //   },
-      //   s3UploadOptions: { Bucket: process.env.S3_BUCKET_NAME }
-      // }),
       new webpack.HashedModuleIdsPlugin()
     ]
   ],
