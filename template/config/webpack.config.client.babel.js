@@ -4,10 +4,11 @@ import webpack from 'webpack'
 
 import EntrypointPlugin from '../lib/entrypoint-plugin'
 
-const isProd = process.env.NODE_ENV === 'production'
+const { ASSETS_BASE_URL, NODE_ENV } = process.env
+const isProd = NODE_ENV === 'production'
 const rootDir = process.cwd()
 
-const assetsBaseUrl = new URL(process.env.ASSETS_BASE_URL)
+const assetsBaseUrl = new URL(ASSETS_BASE_URL)
 const publicPath = `${assetsBaseUrl}/`
 
 export default {
@@ -40,6 +41,10 @@ export default {
     }]
   },
   plugins: [
+    // NOTE: This is needed for bundled dependencies like Redux!!
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+    }),
     new webpack.NormalModuleReplacementPlugin(
       /\/common\/chunks.js/,
       './client-chunks.js'
