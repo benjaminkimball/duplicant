@@ -1,6 +1,6 @@
 {
   "name": "duplicant",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Duplicant is a bare-bones generator for creating React-powered SPAs hosted by simple Express servers.",
   "main": "bin/duplicant.js",
   "bin": {
