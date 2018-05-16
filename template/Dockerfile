@@ -7,6 +7,8 @@ COPY dist/.entrypoint .
 COPY dist/server.js .
 
 RUN source .entrypoint
+ENV ENTRYPOINT_FILENAME $ENTRYPOINT_FILENAME
+
 RUN npm install --only=production
 
 EXPOSE 5000
