@@ -17,7 +17,7 @@ if (['--version', '-v'].includes(command)) {
 if (['--help', '-h'].includes(command)) {
   console.log(`
     Usage
-      $ dup <directory>
+      $ duplicant <directory>
   `)
   process.exit()
 }
@@ -40,7 +40,6 @@ const devDependencies = [
   'babel-plugin-syntax-dynamic-import',
   'babel-plugin-transform-class-properties',
   'babel-plugin-transform-object-rest-spread',
-  'babel-polyfill',
   'babel-preset-env',
   'babel-preset-react',
   'babel-register',
@@ -66,8 +65,7 @@ const devDependencies = [
   'webpack',
   'webpack-cli',
   'webpack-dev-server',
-  'webpack-node-externals',
-  'webpack-s3-plugin'
+  'webpack-node-externals'
 ]
 
 try {
