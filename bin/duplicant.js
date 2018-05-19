@@ -46,6 +46,7 @@ const devDependencies = [
   'chai',
   'dotenv',
   'enzyme',
+  'enzyme-adapter-react-16',
   'eslint',
   'eslint-config-standard',
   'eslint-config-standard-jsx',
