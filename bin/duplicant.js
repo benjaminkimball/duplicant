@@ -57,7 +57,6 @@ const devDependencies = [
   'eslint-plugin-standard',
   'mocha',
   'npm-run-all',
-  'nsp',
   'nyc',
   'react-hot-loader',
   'sinon',
