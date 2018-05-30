@@ -4,7 +4,7 @@
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.client.babel.js --mode production",
     "build:server": "NODE_ENV=production webpack --config config/webpack.config.server.babel.js --mode production",
     "lint": "eslint .",
-    "lint:security": "eslint . --config .eslintrc.security",
+    "lint:security": "eslint --config .eslintrc.security --no-eslintrc .",
     "start": "TZ=UTC npm-run-all --parallel start:client start:server",
     "start:client": "webpack-dev-server -r dotenv/config --config config/webpack.config.client.babel.js --mode development",
     "start:server": "webpack -r dotenv/config --config config/webpack.config.server.babel.js --mode development",
