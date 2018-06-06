@@ -1,5 +1,7 @@
 {
-  "extends": ["standard", "standard-jsx"],
+  "env": { "jest/globals": true },
+  "extends": ["plugin:jest/recommended", "standard", "standard-jsx"],
   "parser": "babel-eslint",
+  "plugins": ["jest"]
   "rules": { "arrow-parens": ["error", "always"] }
 }

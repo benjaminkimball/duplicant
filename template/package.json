@@ -8,12 +8,11 @@
     "start": "TZ=UTC npm-run-all --parallel start:client start:server",
     "start:client": "webpack-dev-server -r dotenv/config --config config/webpack.config.client.babel.js --mode development",
     "start:server": "webpack -r dotenv/config --config config/webpack.config.server.babel.js --mode development",
-    "test": "NODE_ENV=test TZ=UTC mocha -r babel-register --recursive '{client,common,server}/**/*.test.js'",
-    "test:coverage": "nyc npm test"
+    "test": "NODE_ENV=test TZ=UTC jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:watch": "NODE_ENV=test TZ=UTC jest --watch"
   },
-  "nyc": {
-    "exclude": [
-      "**/components/**"
-    ]
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>lib/setup-test.js"
   }
 }
