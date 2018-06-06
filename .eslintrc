@@ -1,4 +1,0 @@
-{
-  "extends": ["standard", "standard-jsx"],
-  "rules": { "arrow-parens": ["error", "always"] }
-}

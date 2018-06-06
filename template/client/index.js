@@ -7,9 +7,6 @@ import Routes from '../common/routes'
 
 import Wrapper from './wrapper'
 
-// Alias window object, global will be populated with client config from server
-window.global = window
-
 const render = (chunks, Routes) => {
   const splitPoints = window.__SPLIT_POINTS__ || []
 
