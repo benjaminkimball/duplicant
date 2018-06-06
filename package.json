@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "duplicant",
   "version": "0.11.0",
   "description": "Duplicant is a bare-bones generator for creating React-powered SPAs hosted by simple Express servers.",
