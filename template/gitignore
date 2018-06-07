@@ -65,3 +65,7 @@ typings/
 
 # Serverless directories
 .serverless
+
+# duplicant specific
+.build
+dist
